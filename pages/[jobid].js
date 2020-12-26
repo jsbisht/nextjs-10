@@ -1,5 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+import Apply from "../client/components/apply";
 
 function Job(props) {
   const { job } = props;
@@ -18,10 +19,9 @@ function Job(props) {
         </h1>
         <p>{jobTitle}</p>
         <p>{jobDesc}</p>
-        <div>
-          <input type="text" placeholder="Enter email id here" />
-          <button type="submit">Apply</button>
-        </div>
+
+        <Apply job={job} />
+
         <br />
         <a href="/">&lt;&lt; Back</a>
       </main>
