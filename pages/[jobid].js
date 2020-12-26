@@ -1,11 +1,9 @@
-import { useRouter } from "next/router";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 
 function Job(props) {
-  const {
-    job: { id }
-  } = props;
+  const { job } = props;
+  const { jobid, jobTitle, jobDesc } = job;
 
   return (
     <div className={styles.container}>
@@ -16,8 +14,16 @@ function Job(props) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          JobId: <a href="https://nextjs.org">{id}</a>
+          JobId: <a href={`/${jobid}`}>{jobid}</a>
         </h1>
+        <p>{jobTitle}</p>
+        <p>{jobDesc}</p>
+        <div>
+          <input type="text" placeholder="Enter email id here" />
+          <button type="submit">Apply</button>
+        </div>
+        <br />
+        <a href="/">&lt;&lt; Back</a>
       </main>
 
       <footer className={styles.footer}>
@@ -35,20 +41,20 @@ function Job(props) {
 }
 
 export async function getStaticPaths() {
+  const res = await fetch("http://localhost:3000/api/jobs");
+  const jobs = await res.json();
+
   return {
-    paths: [
-      // String variant:
-      `/123`
-    ],
+    // Add all possible values of jobid
+    paths: jobs.map(({ jobid }) => `/${jobid}`),
     fallback: true
   };
 }
 
 // This function gets called at build time
-export async function getStaticProps(context) {
-  console.log(context.params);
+export async function getStaticProps() {
   // Call an external API endpoint to get posts
-  const res = await fetch("http://localhost:3000/api/job/123");
+  const res = await fetch("http://localhost:3000/api/job/reed");
   const job = await res.json();
 
   return {

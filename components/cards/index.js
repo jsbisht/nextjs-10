@@ -2,12 +2,12 @@ import styles from "../../styles/Home.module.css";
 
 export function Card(props) {
   const {
-    job: { id, jobTitle, description }
+    job: { jobid, jobTitle, jobDesc }
   } = props;
   return (
-    <a href={`/${id}`} className={styles.card}>
+    <a href={`/${jobid}`} className={styles.card}>
       <h3>{jobTitle} &rarr;</h3>
-      <p>{description}</p>
+      <p>{jobDesc}</p>
     </a>
   );
 }
