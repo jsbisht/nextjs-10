@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import Cards from "../components/cards";
+import Cards from "../client/components/cards";
 
 function Home(props) {
   const { jobs } = props;
